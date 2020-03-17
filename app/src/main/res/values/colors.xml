@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#a78682</color>
+    <color name="colorPrimaryDark">#51344d</color>
+    <color name="colorAccent">#a78682</color>
+    <color name="pale">#e7ebc5</color>
+    <color name="purple_taupe">#51344d</color>
+    <color name="grullo">#a78682</color>
+    <color name="wenge">#6f5060</color>
+    <color name="grey">#989788</color>
+    <color name="wenge_tinted">#8051344d</color>
+    <color name="red">#ff0000</color>
+</resources>
