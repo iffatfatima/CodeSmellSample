@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".EditorFragment">
 
@@ -16,7 +15,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
 
     <TextView
         android:id="@+id/save"
@@ -27,10 +26,10 @@
         android:textSize="24sp"
         android:gravity="center"
         android:padding="8dp"
+        android:layout_marginEnd="6dp"
         android:layout_alignEnd="@id/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        android:layout_gravity="end"/>
+    </androidx.appcompat.widget.Toolbar>
     <RelativeLayout
         android:id="@+id/parent"
         android:layout_width="0dp"

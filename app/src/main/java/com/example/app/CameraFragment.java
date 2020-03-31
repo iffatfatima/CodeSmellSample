@@ -162,7 +162,7 @@ public class CameraFragment extends Fragment
             FragmentManager manager = getChildFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.container, fragment, EditorFragment.TAG);
-            transaction.addToBackStack(null);
+            transaction.addToBackStack(EditorFragment.TAG);
             transaction.commit();
 //            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
         }
@@ -703,7 +703,6 @@ public class CameraFragment extends Fragment
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
                 }

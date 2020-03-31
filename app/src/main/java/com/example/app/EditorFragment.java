@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.net.Uri;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -25,6 +25,9 @@ import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.io.File;
 
 public class EditorFragment extends Fragment implements View.OnClickListener {
 
@@ -39,10 +42,9 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
     private SeekBar seekbar;
     private TextView saveBtn;
     private AlertDialog colorPickerDialog;
-//    private Spinner spinner;
-
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;//LC
     private Bitmap bitmap;
+    private Handler handler = new Handler();//LT
 
     public static EditorFragment newInstance() {
         return new EditorFragment();
@@ -102,7 +104,7 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
                     }
                 })
                 .build();
-
+        mListener = (OnFragmentInteractionListener) getActivity();
     }
 
     private void initUI() {
@@ -110,7 +112,7 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
         if (bundle != null) {
             byte[] byteArray = bundle.getByteArray("image");
             if (byteArray != null) {
-                bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);//DTWC
                 int sensorOrientation = bundle.getInt("orientation");
                 int bitmapOrientation = (sensorOrientation + 90 + 360) % 360;
                 Matrix matrix = new Matrix();
@@ -130,7 +132,7 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
                         matrix.postRotate(180);
                         break;
                 }
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);//BFU
                 imageView.setImageBitmap(bitmap);
             }
 
@@ -181,6 +183,8 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(), R.raw.click);//ERB, RL
+        mediaPlayer.start();
         switch (view.getId()){
             case R.id.size_picker:
                 break;
@@ -202,10 +206,18 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
                 imageView.buildDrawingCache();
                 canvas.destroyDrawingCache();
                 canvas.buildDrawingCache();
-                Bitmap canvasBitmap = canvas.getDrawingCache();
+                final Bitmap canvasBitmap = canvas.getDrawingCache();
                 Canvas canvas = new Canvas(canvasBitmap);
-               getView().findViewById(R.id.parent).draw(canvas);
-                Utils.saveImage(canvasBitmap);
+                getView().findViewById(R.id.parent).draw(canvas);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        File file = Utils.saveImage(canvasBitmap);
+                        Snackbar.make(getView().findViewById(R.id.bar), "Image Saved. GO back to view it in gallery",
+                                Snackbar.LENGTH_LONG).show();
+                        mListener.onImageSaved(file);
+                    }
+                });
                 break;
         }
 
@@ -224,6 +236,6 @@ public class EditorFragment extends Fragment implements View.OnClickListener {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        void onImageSaved(File file);
     }
 }

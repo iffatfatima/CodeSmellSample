@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#a78682</color>
+    <color name="colorPrimary">#51344d</color>
     <color name="colorPrimaryDark">#51344d</color>
     <color name="colorAccent">#a78682</color>
     <color name="pale">#e7ebc5</color>
@@ -10,4 +10,11 @@
     <color name="grey">#989788</color>
     <color name="wenge_tinted">#8051344d</color>
     <color name="red">#ff0000</color>
+    <color name="wenge_translucent">#906f5060</color>
+    <color name="green">#BADD73</color>
+    <color name="cyan">#54D6AB</color>
+    <color name="blush">#FDC19A</color>
+    <color name="sky_blue">#44CCF1</color>
+    <color name="purple">#d5aaff</color>
+
 </resources>

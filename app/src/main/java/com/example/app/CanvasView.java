@@ -27,7 +27,7 @@ public class CanvasView  extends View {
 
     void setColor(int color){
         mPaint.setColor(color);
-        invalidate();
+        invalidate();//IWR
     }
 
     void setStyle(Paint.Style style){

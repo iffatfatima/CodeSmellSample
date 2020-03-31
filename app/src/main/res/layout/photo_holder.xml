@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:orientation="vertical"
+    android:layout_margin="2dp"
+    android:layout_width="wrap_content"
+    android:layout_height="180dp">
+
+    <ImageView
+        android:id="@+id/iv_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars"/>
+    <RelativeLayout
+        android:id="@+id/iv_tinted"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:background="@color/wenge_translucent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_bin"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="centerCrop"
+        android:layout_margin="2dp"
+        android:src="@drawable/ic_bin"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_undo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/iv_undo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="centerCrop"
+        android:layout_margin="2dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_undo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_bin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
